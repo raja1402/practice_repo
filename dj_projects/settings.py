@@ -141,3 +141,4 @@ CACHES = {
         'LOCATION': 'DataFlair',
     }
 }
+#cache file is formed in local memory
