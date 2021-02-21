@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from .models import *
 # Create your views here.
 def setting(request):
     if request.method=='POST':
@@ -14,6 +14,7 @@ def setting(request):
 
 # session stores in db
 def checking(request):
+
     if request.method=='POST':
         ourvalue = request.POST['your_name']
 
@@ -114,3 +115,17 @@ def hi(requets):
     current_time = now.strftime("%H:%M:%S")
     return HttpResponse(current_time)
 
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+def locations(request):
+    user_list= Location.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(user_list, 3)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    return render(request, 'user_list.html', { 'users': users })

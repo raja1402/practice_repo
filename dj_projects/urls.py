@@ -26,5 +26,6 @@ urlpatterns = [
     path('cdelete',delete_cookie),
     path('hello',hello),
     path('hi',hi),
+    path('locations',locations),
 
 ]
